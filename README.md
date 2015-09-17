@@ -29,3 +29,8 @@ For more information on running rails with mongoid, check out:
 2. `git clone git@github.com:blanksblanks/project-rails.git`
 3. `cd project-rails`
 4. bundle
+
+## Some meetups I plan to go to:
+- [Game Night @ Kickstarter](http://www.meetup.com/Brooklyn-Swift-Developers/events/225289456/)
+- [iOS Security for App Developers](http://www.meetup.com/NYSwift/events/224586428/)
+- [Demystifying Apple Pay & Gilt + Swift](http://www.meetup.com/iOSoho/events/221974097/)
