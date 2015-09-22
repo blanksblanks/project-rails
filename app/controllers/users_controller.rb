@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
+
+  # Role of Controllers:
+  #  receives a request (has access to params object)
+  #  fetch or save data via a model
+  #  uses a view to create output
+
+  # The before_action calls a private method and removes the need to add the
+  # line `@user = User.find(params[:id])` to each of these 4 functions
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :require_user, :only => [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -63,6 +72,9 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    # params is a HashWithInDifferentAccess (Rails object, not Ruby)
+    # params[:id] is an example of a symbol (singleton string)
+    # symbols save memory by referencing the same place in memory.
     def set_user
       @user = User.find(params[:id])
     end
