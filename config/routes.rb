@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
+  # Resource routes automatically provide 7 routes, which each map to a
+  # controller and action as well as to CRUD operations in the database
   resources :users
-  root 'home#index'
-  get 'home/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  get 'signup' => 'users#new', :as => 'signup'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get 'logout' => 'sessions#destroy', :as => 'logout'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
