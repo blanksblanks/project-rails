@@ -14,7 +14,7 @@
 
 ### Set up a Rails app with MongoDB and Mongoid
 1. `rails new appname --skip-active-record` (Instead of using the default SQLite3, we will be running rails with MongoDB and Mongoid. Also, replace `project-rails` with whatever you want to name your app)
-2. Add this line to your gemfile in your app directory: `gem 'mongoid', '~> 4.0.0'`
+2. Add this line to your gemfile in your app directory: `gem 'mongoid', '~> 5.0.0'`
 3. `bundle`
 4. `rails generate mongoid:config` (This creates a mongoid.yml file in your config)
 5. `rails s`

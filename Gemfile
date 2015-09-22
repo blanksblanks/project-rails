@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use mongoid instead of ActiveRecord and SQLite3
-gem 'mongoid', '~> 4.0.0'
+gem 'mongoid', '~> 5.0.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
