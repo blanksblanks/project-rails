@@ -9,8 +9,12 @@
 7. `sudo gem install bundler`
 8. `rbenv rehash`
 9. `brew install mongodb`
-10. `gem install rails --no-ri --no-doc` (`ri` is a companion to `rdoc` allows you to 'display information about Ruby classes, modules, and methods' from your console. Removing the `rdoc` and `ri` when installing new gems speeds up your gem installations and creates less clutter in your system.)
-11. `echo "gem: --no-ri --no-rdoc" > ~/.gemrc` (This is optional. If you want to default not having the documentation, add these flags to your global `gemrc` definition.)
+10. Follow brew instructions to have launchd start mongodb at login:
+    `ln -sfv /usr/local/opt/mongodb/\*.plist ~/Library/LaunchAgents`
+Then to load mongodb now:
+    `launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist`
+11. `gem install rails --no-ri --no-doc` (`ri` is a companion to `rdoc` allows you to 'display information about Ruby classes, modules, and methods' from your console. Removing the `rdoc` and `ri` when installing new gems speeds up your gem installations and creates less clutter in your system.)
+12. `echo "gem: --no-ri --no-rdoc" > ~/.gemrc` (This is optional. If you want to default not having the documentation, add these flags to your global `gemrc` definition.)
 
 ### Set up a Rails app with MongoDB and Mongoid
 1. `rails new appname --skip-active-record` (Instead of using the default SQLite3, we will be running rails with MongoDB and Mongoid. Also, replace `project-rails` with whatever you want to name your app)
