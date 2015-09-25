@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :photos
+  resources :pets
+  resources :pets
   # Resource routes automatically provide 7 routes, which each map to a
   # controller and action as well as to CRUD operations in the database
   resources :users

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  label: 
+  description: 
+  date_taken: 
+
+two:
+  label: 
+  description: 
+  date_taken: 
