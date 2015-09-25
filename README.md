@@ -34,7 +34,27 @@ For more information on running rails with mongoid, check out:
 3. `cd project-rails`
 4. bundle
 
-## Some meetups I plan to go to:
+## Some Meetups I plan to go to:
 - [Game Night @ Kickstarter](http://www.meetup.com/Brooklyn-Swift-Developers/events/225289456/)
 - [iOS Security for App Developers](http://www.meetup.com/NYSwift/events/224586428/)
 - [Demystifying Apple Pay & Gilt + Swift](http://www.meetup.com/iOSoho/events/221974097/)
+
+## Schema Description
+
+Example of generating a model: `rails g scaffold User first_name:String last_name:String email:String`
+
+```
+class User
+  has_and_belongs_to_many :pets, inverse_of: :pets
+  embeds_many :photos, as: :photographic
+end
+
+class Pet
+  has_and_belongs_to_many :users, inverse_of: :users
+  embeds_many :photos, as: :photographic
+end
+
+class Photo
+  embedded_in :photographic, polymorphic: true
+end
+```
