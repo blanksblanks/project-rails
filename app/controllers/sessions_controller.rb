@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email])
+    user = User.authenticate(params[:session][:email], params[:session][:password])
     if user
       # session store wraps data cached from request to request
       session[:user_id] = user.id
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url
+    redirect_to root_url, :notice => "Logged out"
   end
 
 end

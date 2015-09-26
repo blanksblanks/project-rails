@@ -40,7 +40,9 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
+        format.html { render :new, notice: 'User was not successfully created.
+          Explot domain restrictions for expressiveness, performance: '
+        "People will do with your language what you never thought." }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
