@@ -58,3 +58,35 @@ class Photo
   embedded_in :photographic, polymorphic: true
 end
 ```
+
+
+I chose the `has_and_belongs_to_many` association between users and pets because users can have multiple pets, and likewise, pets can have more than 1 owner. It's a common case where pets can have two pet parents if they are living with a couple.
+
+I decided to allow photos to have a polymorphic association, meaning that a photo is a child embedded document that can belong to more than one type of parent document (in this case, a photo can belong to either a Pet or a User). Mongoid documentation states: "On the child object, an additional field will be stored that indicates the type of parent. Polymorphic behavior is allowed on all relations with the exception of has_and_belongs_to_many." To find out the parent of a photo with a polymorphic association, you can call `photo.photographic`.
+
+### Create Documents with Associations in `rails c`
+
+There are two ways to create an association between two objects.
+
+First, you can create them separately.
+
+```
+# Since user already exists
+irb(main):001:0> rob = User.find_by(first_name: "Robert")
+=> #<User _id: 5605773bf0ca50d9dc000000, first_name: "Robert", last_name: "L", email: "mystery@mystery.com", pet_ids: [BSON::ObjectId('5605778ef0ca50da39000001'), BSON::ObjectId('560577b5f0ca50da39000002')]>
+irb(main):015:0> spicy = Pet.create(:name => "Spicy", :species => "Leopard Gecko", :color => "Pinkish", :birthday => "2011-11-11")
+=> #<Pet _id: 56057d03f0ca50db48000000, name: "Spicy", species: "Leopard Gecko", color: "Pinkish", birthday: 2011-11-11 00:00:00 UTC, user_ids: nil>
+irb(main):017:0> rob.pets << spicy
+```
+
+Or, you can use the build command. According to mongoid documentation: "If the document is embedded, in order to be persisted it must always have a reference to its parent document." Therefore, you have to use this approach when creating embedded documents.
+
+```
+irb(main):025:0>  photo1 = happy.photos.build(:label => "Happy's first snow", :description => "This is the first time Happy saw snow! He loved it!", :date_taken => "2014-11-01")
+=> #<Photo _id: 56057f9df0ca50db48000003, label: "Happy's first snow", description: "This is the first time Happy saw snow! He loved it!", date_taken: "2014-11-01", pet_ids: nil>
+irb(main):026:0> happy.photos
+=> [#<Photo _id: 56057f9df0ca50db48000003, label: "Happy's first snow", description: "This is the first time Happy saw snow! He loved it!", date_taken: "2014-11-01", pet_ids: nil>]
+# Call photographic on photo1 to find out where it is embedded in
+irb(main):052:0> photo1.photographic
+=> #<Pet _id: 5605778ef0ca50da39000001, name: "Happy", species: "Shiba Inu", color: "Black and Tan", birthday: 2014-07-29 00:00:00 UTC, user_ids: [BSON::ObjectId('5605775ef0ca50da39000000'), BSON::ObjectId('5605773bf0ca50d9dc000000')]>
+```
