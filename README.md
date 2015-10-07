@@ -1,3 +1,5 @@
+## 1. Rails app setup
+
 ### From zero to Rails
 1. install homebrew:
 `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -39,7 +41,7 @@ For more information on running rails with mongoid, check out:
 - [iOS Security for App Developers](http://www.meetup.com/NYSwift/events/224586428/)
 - [Demystifying Apple Pay & Gilt + Swift](http://www.meetup.com/iOSoho/events/221974097/)
 
-## Schema Description
+## 2. Schema Description
 
 Example of generating a model: `rails g scaffold User first_name:String last_name:String email:String`
 
@@ -64,7 +66,7 @@ I chose the `has_and_belongs_to_many` association between users and pets because
 
 I decided to allow photos to have a polymorphic association, meaning that a photo is a child embedded document that can belong to more than one type of parent document (in this case, a photo can belong to either a Pet or a User). Mongoid documentation states: "On the child object, an additional field will be stored that indicates the type of parent. Polymorphic behavior is allowed on all relations with the exception of has_and_belongs_to_many." To find out the parent of a photo with a polymorphic association, you can call `photo.photographic`.
 
-### Create Documents with Associations in `rails c`
+## 3. Create Documents with Associations in `rails c`
 
 There are two ways to create an association between two objects.
 
@@ -90,3 +92,9 @@ irb(main):026:0> happy.photos
 irb(main):052:0> photo1.photographic
 => #<Pet _id: 5605778ef0ca50da39000001, name: "Happy", species: "Shiba Inu", color: "Black and Tan", birthday: 2014-07-29 00:00:00 UTC, user_ids: [BSON::ObjectId('5605775ef0ca50da39000000'), BSON::ObjectId('5605773bf0ca50d9dc000000')]>
 ```
+
+## 4. Run a rake task
+
+* To see all possible rake tasks: `rake -T`
+* To run my rake task, which populates the database with the most popular baby names by sex and mother's ethnicity in New York City from app/assets/csvs/names.csv ([original link](https://data.cityofnewyork.us/Health/Most-Popular-Baby-Names-by-Sex-and-Mother-s-Ethnic/25th-nujf)): `rake dataset:populate_names`
+* Run `rails c` and check that the command `Name.all.count` returns 5889 Name objects.
